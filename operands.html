@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Operands &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item" href="registers.html">Special Registers</a>
+    <a class="sidebar-item" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item active" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item" href="examples.html">Examples</a>
+</div>
+<div class="content">
+    <h2>'Directive' Operands</h2>
+
+    <p>
+        Several operands can be used throughout BASM programs to interact with a user, or provide extra functionality
+        relating to text and console manipulation.
+    </p>
+
+    <ul>
+        <li>%0</li>
+        <p>
+            <em>Explanation:</em> Reads 1 key from standard input.
+            <br>
+            <em>Example:</em> <code>PNT %0</code>
+            <br>
+            The code above reads 1 key from the standard input and prints it out.
+            <br>
+            <em>Output:</em> <code>aa</code>
+            <br>
+            The key that was received as input is printed, then printed again.
+        </p>
+
+        <li>%1</li>
+        <p>
+            <em>Explanation:</em> Reads standard input until return is pressed.
+            <br>
+            <em>Example:</em>
+            <code>
+                <br>
+                PNT "Enter your name: "
+                <br>
+                MOV R0, %1
+                <br>
+                PNT "Hello "
+                <br>
+                PNT R0
+                <br>
+            </code>
+            <em>Output:</em>
+            <code>
+                <br>
+                Enter your name: Ben _
+                <br>
+                Hello Ben
+            </code>
+        </p>
+
+        <li>/n</li>
+        <p>
+            <em>Explanation:</em> These two characters, present anywhere in a string, will be treated as a line feed at
+            runtime.
+            <br>
+            <em>Example:</em>
+            <br>
+            <code>PNT "This is the first line!/nThis text is presented below the first line!"</code>
+            <br>
+            <em>Output:</em>
+            <code>
+                <br>
+                This is the first line!
+                This text is presented below the first line!
+            </code>
+        </p>
+    </ul>
+</div>
+</body>
+</html>

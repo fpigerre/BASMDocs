@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Operand Types &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item" href="registers.html">Special Registers</a>
+    <a class="sidebar-item" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item active" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item" href="examples.html">Examples</a>
+</div>
+<div class="content">
+    <h2>Operand Types</h2>
+
+    <p>
+        Operand arguments can easily be manipulated using the following prefixes and suffixes.
+    </p>
+
+    <ul>
+        <li>""</li>
+        <p>
+            <em>Explanation:</em> Double quotes <code>("")</code> represent a string. A string is used to enclose
+            multiple characters.
+            <br>
+            <em>Example:</em> <code>PNT "This sentence must be enclosed in quotes in order to work correctly."</code>
+        </p>
+
+        <li>RX</li>
+        <p>
+            <em>Explanation:</em> Any operand beginning with 'R' tells the processor to resolve a value from a
+            specified register; Where X is a number between (and including) 0 - 15.
+            <br>
+            <em>Example:</em>
+            <code>
+                <br>
+                INC R0
+                <br>
+                INC R1
+                <br>
+                ADD, R2, R1, R0
+            </code>
+        </p>
+
+        <li>Xd</li>
+        <p>
+            <em>Explanation:</em> (Where X is a number) Any number, followed by a lowercase 'd' is considered a decimal
+            literal.
+            <br>
+            <em>Example:</em>
+            <code>
+                <br>
+                INC R0
+                <br>
+                INC R0
+                <br>
+                ADD R1, R0, 5d
+                <br>
+                PNT R1
+                <br>
+            </code>
+            <em>Output:</em>
+            <code>
+                <br>
+                7
+            </code>
+        </p>
+
+        <li>Xb</li>
+        <p>
+            <em>Explanation:</em> (Where X is a combination of 0's and 1's) Any number containing 0's and 1's only,
+            followed by a lowercase 'b', is considered a binary literal.
+        </p>
+
+        <li>Xh</li>
+        <p>
+            <em>Explanation:</em> (Where X is a hexadecimal number) Any number, followed by a lowercase 'h' is
+            interpreted as a hexadecimal number.
+        </p>
+    </ul>
+</div>
+</body>
+</html>

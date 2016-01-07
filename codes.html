@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Registers &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item" href="registers.html">Special Registers</a>
+    <a class="sidebar-item" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item active" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item" href="examples.html">Examples</a>
+</div>
+<div class="content">
+<h2>OP-Codes (Operation Codes)</h2>
+
+<p>
+    The following commands can be used to execute basic functions.
+</p>
+
+<ul>
+<li>ADD</li>
+<p>
+    <em>Explanation:</em> Adds 2 values together and outputs the result to a register.
+    <br>
+    <em>Syntax:</em> <code>ADD OUTPUT_REGISTER, REGISTER_A, REGISTER_B</code>
+    <br>
+    <em>Example:</em> <code>ADD R0, R1, R2</code>
+</p>
+
+<li>SUB (Subtract)</li>
+<p>
+    <em>Explanation:</em> Subtracts one value from another, and outputs the result to a register.
+    <br>
+    <em>Syntax:</em> <code>SUB OUTPUT_REGISTER, REGISTER_A, REGISTER_B</code>
+    <br>
+    <em>Example:</em> <code>SUB R0, 2d, 4d</code>
+</p>
+
+<li>INC (Increment)</li>
+<p>
+    <em>Explanation:</em> Increments a value contained in a register by one.
+    <br>
+    <em>Syntax:</em> <code>INC REGISTER</code>
+    <br>
+    <em>Example:</em> <code>INC R0</code>
+</p>
+
+<li>DEC (Decrement)</li>
+<p>
+    <em>Explanation:</em> Decrements a value contained in a register by one.
+    <br>
+    <em>Syntax:</em> <code>DEC REGISTER</code>
+    <br>
+    <em>Example:</em> <code>DEC R0</code>
+</p>
+
+<li>MOV (Move)</li>
+<p>
+    <em>Explanation:</em> Moves a register's value to a new register, then clears the source register.
+    <br>
+    <em>Syntax:</em> <code>MOVE OUTPUT_REGISTER, SOURCE_REGISTER</code>
+    <br>
+    <em>Example:</em> <code>MOVE R0, R1</code>
+</p>
+
+<li>CPY (Copy)</li>
+<p>
+    <em>Explanation:</em> Copies a value contained in one register to another.
+    <br>
+    <em>Syntax:</em> <code>COPY OUTPUT_REGISTER, SOURCE_REGISTER</code>
+    <br>
+    <em>Example:</em> <code>COPY R0, R1</code>
+</p>
+
+<li>PNT (Print)</li>
+<p>
+    <em>Explanation:</em> Prints to the standard output stream.
+    <br>
+    <em>Syntax:</em> <code>PNT SOURCE_REGISTER</code>
+    <br>
+    <em>Example:</em> <code>PNT "Hello World!"</code>
+</p>
+
+<li>JMP (Unconditional Jump)</li>
+<p>
+    <em>Explanation:</em> Allows the processor to jump to a different location in the source file. Maximum
+    recursion rate is twelve instructions per second.
+    <br>
+    <em>Syntax:</em> <code>JMP LINE_NUMBER|LABEL</code>
+    <br>
+    <em>Example:</em>
+    <code>
+        <br>
+        INC R0
+        <br>
+        PNT R0
+        <br>
+        JMP 0
+        <br>
+        Output:
+        <br>
+        1
+        <br>
+        2
+        <br>
+        3
+        <br>
+        4
+        <br>
+        5
+        <br>
+        6
+        <br>
+        7
+        <br>
+        ...output omitted (until stack overflow)...
+    </code>
+</p>
+
+<li>JME (Jump if equal)</li>
+<p>
+    <em>Explanation:</em> If the value of register 14 is 0, the processor jumps to a line. JME should be used
+    after CMP. This command is very similar to JMP.
+    <br>
+    <em>Syntax:</em> <code>JME LINE_NUMBER|LABEL</code>
+    <br>
+    <em>Example:</em>
+    <code>
+        <br>
+        Line 2: JME 4
+        <br>
+        Line 3: LVE
+        <br>
+        Line 4: PNT "This will be jumped to to avoid the LVE! (skip line 3)"
+    </code>
+</p>
+
+<li>JMN (Jump if NOT equal)</li>
+<p>
+    <em>Explanation:</em> If the value of register 14 is NOT 0, the processor jumps to a line. JMN should be
+    used after CMP. This command is very similar to JMP.
+    <br>
+    <em>Syntax:</em> <code>JMN LINE_NUMBER|LABEL</code>
+    <br>
+    <em>Example:</em>
+    <code>
+        <br>
+        Line 2: JMN 4
+        <br>
+        Line 3: LVE
+        <br>
+        Line 4: PNT "This will be jumped to to avoid the LVE! (skip line 3)"
+    </code>
+</p>
+
+<li>JML (Jump if less than)</li>
+<p>
+    <em>Explanation:</em> If the result of the compare function is 0, or a negative number, the "jump if less
+    than" command will make the processor jump to a line number.
+    <br>
+    <em>Syntax:</em> <code>JML LINE_NUMBER|LABEL</code>
+    <br>
+    <em>Example:</em>
+    <code>
+        <br>
+        PNT "Start of program"
+        <br>
+        CMP 5d, 10d
+        <br>
+        JML ifTrue:
+        <br>
+        LVE
+        <br>
+        .ifTrue:
+        <br>
+        PNT "5 is less than 10"
+        <br>
+        LVE
+    </code>
+</p>
+
+<li>JMG (Jump if greater than)</li>
+<p>
+    <em>Explanation:</em> If the result of the compare function is positive, the "jump if greater than" command
+    will make the processor jump to a line number.
+    <br>
+    <em>Syntax:</em> <code>JML LINE_NUMBER|LABEL</code>
+    <br>
+    <em>Example:</em>
+    <code>
+        <br>
+        PNT "Start of program"
+        <br>
+        CMP 10d, 5d
+        <br>
+        JMG ifTrue:
+        <br>
+        LVE
+        <br>
+        .ifTrue:
+        <br>
+        PNT "10 is greater than 5"
+        <br>
+        LVE
+    </code>
+</p>
+
+<li>CMP (Compare)</li>
+<p>
+    <em>Explanation:</em> Two operands are given, CMP converts them both to numerical form, subtracts the first
+    from the second number, then stores the value in register 14. CMP should be used with branch/jump
+    instructions.
+    <br>
+    <em>Syntax:</em> <code>CMP REGISTER_A, REGISTER_B</code>
+    <br>
+    <em>Example:</em> <code>CMP 15d, 14d</code>
+</p>
+
+<li>LVE (Leave)</li>
+<p>
+    <em>Explanation:</em> Exits the program.
+    <br>
+    <em>Syntax:</em> <code>LVE</code>
+    <br>
+    <em>Example:</em> <code>LVE</code>
+</p>
+</ul>
+</div>
+</body>
+</html>

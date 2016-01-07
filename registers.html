@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Special Registers &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item active" href="registers.html">Special Registers</a>
+    <a class="sidebar-item" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item" href="examples.html">Examples</a>
+</div>
+<div class="content">
+    <h2>Special Registers</h2>
+
+    <p>
+        A number of BASM's registers have been reserved for uses in future development and temporary data storage.
+        These "special registers" are detailed below.
+    </p>
+
+    <ul>
+        <li>Register 15</li>
+        <p>
+            Register fifteen should not be used by used to store data in programs, as this register is written to when
+            an
+            error arises in the program.
+            The value contained in R15 changes to '1' when a fault occurs.
+        </p>
+
+        <li>Register 14</li>
+        <p>
+            Register fourteen is reserved for future use by the Virtual Machine's processor.
+            Although it is possible for earlier versions to use this register,
+            it is recommended you do not use it in order to promote compatibility and good practice.
+        </p>
+
+        <li>Register 13</li>
+        <p>
+            This register is used for storing temporary data.
+            It is possible to use this register,
+            however be warned that the processor may overwrite this register in order to store obsolete junk.
+        </p>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Directives &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item" href="registers.html">Special Registers</a>
+    <a class="sidebar-item active" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item" href="examples.html">Examples</a>
+</div>
+<div class="content">
+    <h2>Directives Reference (Pre-Processor Commands)</h2>
+
+    <p>
+        The following commands are executed by the pre-processor before runtime.
+    </p>
+
+    <ul>
+        <li>%include</li>
+        <p>
+            <em>Explanation:</em> This command retrieves text from a file and places it in the source file where the
+            %include was called from, before the source file is lexically-analysed.
+            <br>
+            <em>Syntax:</em> <code>%include "EXTERNAL_FILE"</code>
+            <br>
+            <em>Example:</em> <code>%include "lib.txt"</code>
+        </p>
+
+        <li>%strict</li>
+        <p>
+            <em>Explanation:</em> This command enables strict mode for the processor. Line numbers start at 0 and
+            compensations are no longer made (e.g. comments without spaces before comment content are considered invalid
+            "%;comment"). It is recommended that you leave this setting off, as it is mainly for debugging purposes.
+            <br>
+            <em>Syntax:</em> <code>%strict</code>
+            <br>
+            <em>Example:</em> <code>%strict</code>
+        </p>
+
+        <li>%debug</li>
+        <p>
+            <em>Explanation:</em> Turns debugging mode on. In debugging mode, extra messages are displayed from the
+            pre-processor and the lexer. It is recommended you leave this setting off in a production environment.
+            <br>
+            <em>Syntax:</em> <code>%debug</code>
+            <br>
+            <em>Example:</em> <code>%debug</code>
+        </p>
+
+        <li>%view</li>
+        <p>
+            <em>Explanation:</em> After the pre-processor has completed, it will display the new, processed version of
+            your code, with line numbers.
+            <br>
+            <em>Syntax:</em> <code>%view</code>
+            <br>
+            <em>Example:</em> <code>%view</code>
+        </p>
+
+        <li>% X: OR .X:</li>
+        <p>
+            <em>Explanation:</em> These commands are used for label declaration. Labels are used to make referencing
+            line numbers easy (line numbers are usually calculated by the pre-processor, rendering them difficult to
+            reference before pre-processing has completed). This command is commonly used in conjunction with 'jump'
+            operations.
+            <br>
+            <em>Syntax:</em> <code>% LABEL_NAME: OR .LABEL_NAME:</code>
+            <br>
+            <em>Example:</em>
+            <code>
+                % start_of_loop:
+                PNT "Looping"
+                JMP start_of_loop:
+                LVE
+                .end_of_loop
+            </code>
+        </p>
+
+        <li>%; OR %comm</li>
+        <p>
+            <em>Explanation:</em> A comment. This line is removed before the lexical analysis commences. There MUST be a
+            space between the command and the comment, particularly if strict mode is enabled.
+            <br>
+            <em>Syntax:</em>
+            <code>
+                <br>
+                %; COMMENT
+                <br>
+                %comm COMMENT
+            </code>
+            <br>
+            <em>Example:</em>
+            <code>
+                <br>
+                %comm A comment, it doesn't matter what is typed here
+                <br>
+                %; A comment can also be written like this. It doesn't matter which method is chosen.
+            </code>
+        </p>
+    </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Examples &middot BASM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/stylesheets/stylesheet.css">
+</head>
+<body>
+<nav>
+    <div class="navbar">
+        <div class="navbar-brand">
+            <i class="fa fa-book"></i>
+            <a href="index.html">BASM Documentation</a></div>
+        <a href="http://csadvert.me" class="navbar-sub">by csadvert.me</a>
+    </div>
+</nav>
+<div class="sidebar">
+    <a class="sidebar-item" href="index.html">Introduction</a>
+    <a class="sidebar-item" href="registers.html">Special Registers</a>
+    <a class="sidebar-item" href="directives.html">Directives Reference</a>
+    <a class="sidebar-item" href="codes.html">OP-Codes</a>
+    <a class="sidebar-item" href="operands.html">'Directive' Operands</a>
+    <a class="sidebar-item" href="operand-types.html">Operand Types</a>
+    <a class="sidebar-item active" href="examples.html">Examples</a>
+</div>
+<div class="content">
+    <h2>Code Examples</h2>
+
+    <h3>Simple "Hello World" program</h3>
+    <code>PNT "Hello World"</code>
+
+    <h3>Name Asker</h3>
+    <pre><code>
+        PNT "Hello!/nWhat is your name? "
+        MOV R0, %1
+        PNT "Hello "
+        PNT R0
+        PNT ", that's a nice name!"
+    </code></pre>
+
+    <h3>Arithmetic Example</h3>
+    <pre><code>
+        PNT "This is a basic arithmatic, which covers the following:/n"
+        PNT "-Addition/n-Subtraction/n-Multiplication/n-Division/n/n"
+
+        PNT "Addition/n---/n5 + 2 = "
+        ADD R0, 5d, 2d
+        PNT R0
+        PNT "/n/n"
+
+        PNT "Subtraction/n---/n6 - 4 = "
+        SUB R1, 6d, 4d
+        PNT R1
+        PNT "/n/n"
+
+        PNT "Multiplication/n---/n2 * 3 = "
+        CPY R2, 3d
+        ADD R3, R2, R2
+        PNT R3
+    </code></pre>
+
+    <h3>If-statement Equivalent</h3>
+    <pre><code>
+        %; This program simply takes 2 strings and tests if they are equal or not.
+        %; Based on whether they are equal or not, the processor decides what line to jump to, and starts executing.
+
+        PNT "Enter a string: "
+        MOV R0, %1
+
+        PNT "Enter another string: "
+        MOV R1, %1
+
+        CMP R0, R1
+        JME 15
+        JMN 20
+        LVE
+
+        PNT "Equal!"
+        MOV R13, %1
+        PNT "/n"
+        JMP 0
+
+        PNT "NOT Equal!"
+        MOV R13, %1
+        PNT "/n"
+        JMP 0
+
+        MOV R13, %1
+    </code></pre>
+
+    <h3>Stack-usage Demo</h3>
+    <pre><code>
+        %; Simple stack usage example
+
+        %; Push the values required onto the stack (Remember: first in - last out)
+        PSH "Another/n"
+        PSH "Hi world/n"
+
+        %; Pop the values in order, then place the return values into registers...
+        POP R0
+        POP R1
+
+        %; Print them out!
+        PNT R0
+        PNT R1
+
+        MOV R13, %1
+    </code></pre>
+
+    <h3>Addition Calculator (Can be expanded!)</h3>
+    <pre><code>
+        %; Simple addition calculator. Can be expanded with conditional jumps to include more modes!
+
+        %; Prompt for 2 values to add
+        PNT "Enter x: "
+        MOV R0, %1
+
+        PNT "Enter y: "
+        MOV R1, %1
+
+        %; Perform calculation
+        ADD R2, R1, R0
+
+        %; Display output
+        PNT R0
+        PNT " + "
+        PNT R1
+        PNT " = "
+        PNT R2
+
+        %; Wait for RETURN before exiting
+        MOV R13, %1
+    </code></pre>
+
+    <h3>Equivalent of http://www.codingunit.com/c-tutorial-for-loop-while-loop-break-and-continue</h3>
+    <pre><code>
+        %; Equivalent of http://www.codingunit.com/c-tutorial-for-loop-while-loop-break-and-continue
+
+        %; Set for limit (i < 10)
+        MOV R1, 10
+
+        .beginLoop:
+        INC R0
+        PNT "Hello/n"
+        PNT "World/n"
+
+        CMP R1, R0
+        JMG beginLoop:
+        JML done:
+
+        %; If something falls over, just exit. Generally good practice for just after a JMP statement.
+        LVE
+
+        .done:
+        LVE
+    </code></pre>
+</div>
+</body>
+</html>
